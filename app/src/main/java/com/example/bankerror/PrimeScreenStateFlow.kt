@@ -5,12 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankerror.data.Repository
 import com.example.bankerror.domain.DataAlpha
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-
 
 class PrimeScreenStateFlow:ViewModel() {
 
@@ -25,7 +21,6 @@ class PrimeScreenStateFlow:ViewModel() {
         viewModelScope.launch {
             val items = repository.getRateAlpha()
             _itemsStateFlow.value = listOf(items)
-            Log.i(TAGbank, "PrimeScreenStateFlow содержит ответ: {${_itemsStateFlow.value}}")
         }
     }
 }

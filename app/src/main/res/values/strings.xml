@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">bankError</string>
-    <string name="usd">USD</string>
-    <string name="byn">BYN</string>
+    <string name="app_name">Alpha Compose</string>
 
     <string name="rate_national_bank">Курс нацбанка</string>
     <string name="rate_alpha">Курс Альфа-банка</string>

@@ -10,7 +10,7 @@ const val ratesNationalBank = "partner/1.0.1/public/nationalRates?currencyCode=8
 
 class Repository {
     suspend fun getRateAlpha(): DataAlpha {
-        Log.i(TAGbank, "Repository.getRateAlpha: запрос в сеть АльфаКурс")
+        Log.i(TAGbank, "Repository.getRateAlpha: запрос в сеть АльфаБанкКурс")
         Log.i(
             TAGbank,"Repository.getRateAlpha: ответ JSON ${RetrofitObjectInstance.api.getAlpha()}"
         )
