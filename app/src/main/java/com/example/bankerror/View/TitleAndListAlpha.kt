@@ -56,14 +56,14 @@ fun TitleAppBar(listRate: List<DataAlpha>) {
                 .background(Color.LightGray)
         ) {
             item {
-                Heading()
+                Heading() //Заголовок: валютная пара, покупка, продажа
             }
-
             itemsIndexed(listRate) { _, item ->
 
                 val listRateNoId: List<List<BodyDataAlpha>> = listOf(item.rate)
                 Log.i(TAGbank, "Содержание listRateNoId: $listRateNoId")
 
+                //разделить список списков на части
                 for (i in listRateNoId) {
                     for (a in i) {
                         ListItemCurrency(itemFlow = a)
