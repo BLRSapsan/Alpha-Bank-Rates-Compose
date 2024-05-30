@@ -28,11 +28,10 @@ import com.example.bankerror.TAGbank
 import com.example.bankerror.domain.BodyDataAlpha
 import com.example.bankerror.domain.DataAlpha
 
-
 //topBar and main page
 //@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun TitleAppBar(listRate: List<DataAlpha>) {
+fun MainViewAndListRate(listRate: List<DataAlpha>) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -60,13 +59,13 @@ fun TitleAppBar(listRate: List<DataAlpha>) {
             }
             itemsIndexed(listRate) { _, item ->
 
-                val listRateNoId: List<List<BodyDataAlpha>> = listOf(item.rate)
-                Log.i(TAGbank, "Содержание listRateNoId: $listRateNoId")
+                val ratesCurrency: List<List<BodyDataAlpha>> = listOf(item.rate)
+                Log.i(TAGbank, "Содержание ratesCurrency: $ratesCurrency")
 
                 //разделить список списков на части
-                for (i in listRateNoId) {
+                for (i in ratesCurrency) {
                     for (a in i) {
-                        ListItemCurrency(itemFlow = a)
+                        ListItemCurrency(items = a)
                     }
                 }
             }
@@ -77,7 +76,7 @@ fun TitleAppBar(listRate: List<DataAlpha>) {
 // состовляющие одной строки
 //@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun ListItemCurrency(itemFlow: BodyDataAlpha) {
+fun ListItemCurrency(items: BodyDataAlpha) {
 
     Row(
         modifier = Modifier
@@ -92,17 +91,17 @@ fun ListItemCurrency(itemFlow: BodyDataAlpha) {
                 .weight(weight = 0.25f)
         ) {
             Text(
-                text = itemFlow.buyIso,
+                text = items.sellIso,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
 
-        Box( //2валюта
+        Box( //2 валюта
             modifier = Modifier
                 .weight(weight = 0.25f)
         ) {
             Text(
-                text = itemFlow.sellIso,
+                text = items.buyIso,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
@@ -111,7 +110,7 @@ fun ListItemCurrency(itemFlow: BodyDataAlpha) {
                 .weight(weight = 0.25f)
         ) {
             Text(
-                text = itemFlow.sellRate.toString(),
+                text = items.buyRate.toString(),
                 modifier = Modifier.align(Alignment.Center)
             )
         }
@@ -120,11 +119,10 @@ fun ListItemCurrency(itemFlow: BodyDataAlpha) {
                 .weight(weight = 0.25f)
         ) {
             Text(
-                text = itemFlow.buyRate.toString(),
+                text = items.sellRate.toString(),
                 modifier = Modifier.align(Alignment.Center)
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
-
     }
 }
