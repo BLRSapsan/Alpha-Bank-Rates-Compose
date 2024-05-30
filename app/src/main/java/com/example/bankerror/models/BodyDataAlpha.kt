@@ -1,4 +1,4 @@
-package com.example.bankerror.domain
+package com.example.bankerror.models
 
 import com.google.gson.annotations.SerializedName
 

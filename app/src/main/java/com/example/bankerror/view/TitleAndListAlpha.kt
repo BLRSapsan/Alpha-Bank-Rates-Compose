@@ -1,4 +1,4 @@
-package com.example.bankerror.View
+package com.example.bankerror.view
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bankerror.R
 import com.example.bankerror.TAGbank
-import com.example.bankerror.domain.BodyDataAlpha
-import com.example.bankerror.domain.DataAlpha
+import com.example.bankerror.models.BodyDataAlpha
+import com.example.bankerror.models.DataAlpha
 
 //topBar and main page
 //@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun MainViewAndListRate(listRate: List<DataAlpha>) {
+fun MainViewListRates(listRates: List<DataAlpha>) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -55,15 +55,15 @@ fun MainViewAndListRate(listRate: List<DataAlpha>) {
                 .background(Color.LightGray)
         ) {
             item {
-                Heading() //Заголовок: валютная пара, покупка, продажа
+                HeadingView() //Заголовок: валютная пара, покупка, продажа
             }
-            itemsIndexed(listRate) { _, item ->
+            itemsIndexed(listRates) { _, listDataAlpha ->
 
-                val ratesCurrency: List<List<BodyDataAlpha>> = listOf(item.rate)
-                Log.i(TAGbank, "Содержание ratesCurrency: $ratesCurrency")
+                val listBodyDataAlpha: List<List<BodyDataAlpha>> = listOf(listDataAlpha.rate)
+                Log.i(TAGbank, "Содержание listBodyDataAlpha: $listBodyDataAlpha")
 
                 //разделить список списков на части
-                for (i in ratesCurrency) {
+                for (i in listBodyDataAlpha) {
                     for (a in i) {
                         ListItemCurrency(items = a)
                     }

@@ -1,4 +1,4 @@
-package com.example.bankerror.View
+package com.example.bankerror.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,7 @@ import com.example.bankerror.R
 // шапка
 @Preview
 @Composable
-fun Heading() {
+fun HeadingView() {
     Row(
         modifier = Modifier
             .fillMaxSize(fraction = 0.95f)

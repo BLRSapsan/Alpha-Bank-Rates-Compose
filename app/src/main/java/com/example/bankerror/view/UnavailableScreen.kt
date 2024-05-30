@@ -1,4 +1,4 @@
-package com.example.bankerror.View
+package com.example.bankerror.view
 
 import android.util.Log
 import androidx.compose.foundation.Image
