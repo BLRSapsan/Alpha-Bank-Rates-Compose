@@ -11,15 +11,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.example.bankerror.models.DataAlpha
 import com.example.bankerror.ui.theme.CurrencyTheme
-import com.example.bankerror.view.ListRatesView
+import com.example.bankerror.view.AvailableScreen
 import com.example.bankerror.view.UnavailableScreen
-import kotlinx.coroutines.flow.asStateFlow
 
 const val TAGbank = "AlphaBankLog"
 
@@ -32,42 +29,28 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CurrencyTheme {
-
-                val checkInternetStateBoolean = remember { mutableStateOf(false)}
+                //переменная, идентифицирующее состояние composable
                 val changeScreenStateInt = remember { mutableStateOf(0) }
-                Log.i(TAGbank, "Значение переменной changeScreenStateInt: ${changeScreenStateInt.value}")
-
-                if (!checkInternetStateBoolean.value){
-                    IsInternetAvailable(mutableStateInt = changeScreenStateInt)
-                    checkInternetStateBoolean.value = true
-                }
+                if (changeScreenStateInt.value==0){ IsInternetAvailable(mutableStateInt = changeScreenStateInt) }
 
                 when (changeScreenStateInt.value) {
-                    //не использую здесь функцию проверку интернета, т.к. при вызове ее отсюда перерисывавается view
-                    1 -> { UnavailableScreen(mutableState = checkInternetStateBoolean)}
-                    2 -> {
-                        ratesAlphaBankVM.getRatesAlpha()
-                        val listRates: List<DataAlpha> =
-                            ratesAlphaBankVM.itemsStateFlow.asStateFlow().collectAsState().value
-                        ListRatesView(listRates = listRates)
-                        //asStateFlow - Представляет этот изменяемый поток состояний как поток состояний, доступный только для чтения.
-                        //collectAsState().value - получить значения из потока.
-                        Log.i(TAGbank, "Main activity listRates: $listRates")
-                    }
+                    1 -> UnavailableScreen(mutableState = changeScreenStateInt)
+                    2 -> AvailableScreen(ratesAlphaBankVM = ratesAlphaBankVM)
                 }
             }
         }
     }
 }
 
+
 @Composable
-    fun IsInternetAvailable(mutableStateInt:MutableState<Int>) {
+fun IsInternetAvailable(mutableStateInt:MutableState<Int>) {
     Log.i(TAGbank, "ВЫЗОВ ФУНКЦИИ isInternetAvailable")
     val checkConnectBoolean = isConnect()
     mutableStateInt.value = if (checkConnectBoolean){
-        2
+        2 //страница курса валют
     } else {
-        1
+        1   //страница нет доступа в интернет
     }
     Log.i(TAGbank, "Ответ функции IsInternetAvailable: ${mutableStateInt.value}")
 }

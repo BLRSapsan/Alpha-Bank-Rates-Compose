@@ -22,7 +22,7 @@ import com.example.bankerror.R
 import com.example.bankerror.TAGbank
 
 @Composable
-fun UnavailableScreen(mutableState: MutableState<Boolean>) {
+fun UnavailableScreen(mutableState: MutableState<Int>) {
     Log.i(TAGbank, "Загрузка экрана *Нет доступа к сети*")
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -30,7 +30,7 @@ fun UnavailableScreen(mutableState: MutableState<Boolean>) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.baseline_accessible_forward_24),
+            painter = painterResource(id = R.drawable.outline_back_hand_24),
             contentDescription = "Internet OFF",
             modifier = Modifier.size(100.dp)
         )
@@ -39,7 +39,7 @@ fun UnavailableScreen(mutableState: MutableState<Boolean>) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedButton(onClick =  { mutableState.value = false }) {
+        OutlinedButton(onClick =  { mutableState.value = 0 }) {
             Text(text = stringResource(id = R.string.repeat))
         }
     }
