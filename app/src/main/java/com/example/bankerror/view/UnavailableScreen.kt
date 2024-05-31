@@ -22,7 +22,7 @@ import com.example.bankerror.R
 import com.example.bankerror.TAGbank
 
 @Composable
-fun UnavailableScreen(mutableState: MutableState<Int>) {
+fun UnavailableScreen(mutableState: MutableState<Boolean>) {
     Log.i(TAGbank, "Загрузка экрана *Нет доступа к сети*")
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -39,7 +39,7 @@ fun UnavailableScreen(mutableState: MutableState<Int>) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedButton(onClick =  { mutableState.value = 0 }) {
+        OutlinedButton(onClick =  { mutableState.value = false }) {
             Text(text = stringResource(id = R.string.repeat))
         }
     }

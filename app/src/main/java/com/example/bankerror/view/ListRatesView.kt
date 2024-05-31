@@ -31,7 +31,7 @@ import com.example.bankerror.models.DataAlpha
 //topBar and main page
 //@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun MainViewListRates(listRates: List<DataAlpha>) {
+fun ListRatesView(listRates: List<DataAlpha>) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
