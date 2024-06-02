@@ -8,7 +8,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -22,8 +21,6 @@ const val TAGbank = "AlphaBankLog"
 
 class MainActivity : ComponentActivity() {
 
-    private val ratesAlphaBankVM by viewModels<RatesAlphaBankVM>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,17 +28,16 @@ class MainActivity : ComponentActivity() {
             CurrencyTheme {
                 //переменная, идентифицирующее состояние composable
                 val changeScreenStateInt = remember { mutableStateOf(0) }
-                if (changeScreenStateInt.value==0){ IsInternetAvailable(mutableStateInt = changeScreenStateInt) }
+                if (changeScreenStateInt.value == 0) { IsInternetAvailable(mutableStateInt = changeScreenStateInt) }
 
                 when (changeScreenStateInt.value) {
                     1 -> UnavailableScreen(mutableState = changeScreenStateInt)
-                    2 -> AvailableScreen(ratesAlphaBankVM = ratesAlphaBankVM)
+                    2 -> AvailableScreen()
                 }
             }
         }
     }
 }
-
 
 @Composable
 fun IsInternetAvailable(mutableStateInt:MutableState<Int>) {
@@ -59,7 +55,7 @@ fun IsInternetAvailable(mutableStateInt:MutableState<Int>) {
 fun isConnect(): Boolean {
     Log.i(TAGbank, "ВЫЗОВ ФУНКЦИИ isConnect")
     val context = LocalContext.current
-    var result: Boolean = false
+    var result = false
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     //получить активное соединение. Ответ null, если их нет.

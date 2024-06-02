@@ -51,8 +51,13 @@ android {
 
 dependencies {
 
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.retrofit)
+
     implementation(libs.converter.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
