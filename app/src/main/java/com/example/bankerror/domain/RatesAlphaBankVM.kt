@@ -1,13 +1,13 @@
-package com.example.bankerror
+package com.example.bankerror.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bankerror.data.RepositoryList
-import com.example.bankerror.models.DataAlpha
+import com.example.bankerror.domain.RepositoryIn
+import com.example.bankerror.domain.models.DataAlpha
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class RatesAlphaBankVM (private val repositoryList: RepositoryList):ViewModel() {
+class RatesAlphaBankVM (private val repositoryIn: RepositoryIn):ViewModel() {
 
     //пустой список StateFlow
     private val _itemsStateFlow: MutableStateFlow<List<DataAlpha>> = MutableStateFlow(emptyList())
@@ -17,7 +17,7 @@ class RatesAlphaBankVM (private val repositoryList: RepositoryList):ViewModel() 
 
     fun getRatesAlpha() {
         viewModelScope.launch {
-            val listExchangeRatesResponse = repositoryList.getListExchangeRatesAlpha()
+            val listExchangeRatesResponse = repositoryIn.getListExchangeRatesAlpha()
             _itemsStateFlow.value = listOf(listExchangeRatesResponse)
         }
     }

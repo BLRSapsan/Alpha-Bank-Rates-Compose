@@ -1,21 +1,14 @@
 package com.example.bankerror
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.example.bankerror.ui.theme.CurrencyTheme
-import com.example.bankerror.view.AvailableScreen
-import com.example.bankerror.view.UnavailableScreen
+import com.example.bankerror.presentation.AvailableScreen
+import com.example.bankerror.presentation.UnavailableScreen
 
 const val TAGbank = "AlphaBankLog"
 
@@ -26,8 +19,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CurrencyTheme {
-                //переменная, идентифицирующее состояние composable
-                val changeScreenStateInt = remember { mutableStateOf(0) }
+                //переменная changeScreenStateInt, идентифицирует состояние composable.
+                //rememberSaveable - сохраняет значение при повроте экрана. Обычное rememer этого не делает.
+                val changeScreenStateInt = rememberSaveable { mutableStateOf(0) }
                 if (changeScreenStateInt.value == 0) { IsInternetAvailable(mutableStateInt = changeScreenStateInt) }
 
                 when (changeScreenStateInt.value) {
@@ -37,36 +31,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun IsInternetAvailable(mutableStateInt:MutableState<Int>) {
-    Log.i(TAGbank, "ВЫЗОВ ФУНКЦИИ isInternetAvailable")
-    val checkConnectBoolean = isConnect()
-    mutableStateInt.value = if (checkConnectBoolean){
-        2 //страница курса валют
-    } else {
-        1   //страница нет доступа в интернет
-    }
-    Log.i(TAGbank, "Ответ функции IsInternetAvailable: ${mutableStateInt.value}")
-}
-
-@Composable
-fun isConnect(): Boolean {
-    Log.i(TAGbank, "ВЫЗОВ ФУНКЦИИ isConnect")
-    val context = LocalContext.current
-    var result = false
-    val connectivityManager =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    //получить активное соединение. Ответ null, если их нет.
-    val networkCapabilities = connectivityManager.activeNetwork ?: return result
-    //получить свойства доступного соединения.
-    val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return result
-    result = when {
-        actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-        actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-        actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-        else -> false
-    }
-    return result
 }

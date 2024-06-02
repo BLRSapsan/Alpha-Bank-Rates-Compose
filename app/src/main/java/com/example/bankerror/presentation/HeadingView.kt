@@ -1,4 +1,4 @@
-package com.example.bankerror.view
+package com.example.bankerror.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

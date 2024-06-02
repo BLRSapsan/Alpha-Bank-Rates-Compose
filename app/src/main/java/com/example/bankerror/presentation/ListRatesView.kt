@@ -1,6 +1,5 @@
-package com.example.bankerror.view
+package com.example.bankerror.presentation
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,9 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bankerror.R
-import com.example.bankerror.TAGbank
-import com.example.bankerror.models.BodyDataAlpha
-import com.example.bankerror.models.DataAlpha
+import com.example.bankerror.domain.models.BodyDataAlpha
+import com.example.bankerror.domain.models.DataAlpha
 
 //topBar and main page
 //@Preview (widthDp = 300, heightDp = 50)
@@ -58,9 +56,8 @@ fun ListRatesView(listRates: List<DataAlpha>) {
                 HeadingView() //Заголовок: валютная пара, покупка, продажа
             }
             itemsIndexed(listRates) { _, listDataAlpha ->
-
+                //извлечь список курсов из общего списка
                 val listBodyDataAlpha: List<List<BodyDataAlpha>> = listOf(listDataAlpha.rate)
-                Log.i(TAGbank, "Содержание listBodyDataAlpha: $listBodyDataAlpha")
 
                 //разделить список списков на части
                 for (i in listBodyDataAlpha) {

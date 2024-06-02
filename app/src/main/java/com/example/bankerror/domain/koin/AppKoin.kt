@@ -1,4 +1,4 @@
-package com.example.bankerror.koin
+package com.example.bankerror.domain.koin
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
