@@ -1,4 +1,4 @@
-package com.example.bankerror
+package com.example.bankerror.data
 
 import com.example.bankerror.models.DataAlpha
 

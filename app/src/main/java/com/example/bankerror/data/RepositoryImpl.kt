@@ -1,7 +1,6 @@
 package com.example.bankerror.data
 
 import android.util.Log
-import com.example.bankerror.RepositoryList
 import com.example.bankerror.models.DataAlpha
 import com.example.bankerror.TAGbank
 
