@@ -1,9 +1,9 @@
 package com.example.bankerror.data
 
-import com.example.bankerror.domain.models.DataAlpha
+import com.example.bankerror.data.model.RatesResponse
 import retrofit2.http.GET
 
 interface Api {
-    @GET(RATES_ALPHA_BANK)
-    suspend fun getAlpha(): DataAlpha
+    @GET("partner/1.0.1/public/rates")
+    suspend fun getRates(): RatesResponse
 }

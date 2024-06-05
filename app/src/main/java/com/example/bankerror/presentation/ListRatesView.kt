@@ -2,14 +2,12 @@ package com.example.bankerror.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,25 +21,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bankerror.R
-import com.example.bankerror.domain.models.BodyDataAlpha
-import com.example.bankerror.domain.models.DataAlpha
+import com.example.bankerror.domain.model.Rate
+import com.example.bankerror.ui.theme.components.BoxItem
+import com.example.bankerror.ui.theme.components.SpacerItem
 
-//topBar and main page
-//@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun ListRatesView(listRates: List<DataAlpha>) {
+fun ListRatesView(listRate: List<Rate>) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             @OptIn(ExperimentalMaterial3Api::class)
             (TopAppBar(
-        title = { Text(stringResource(id = R.string.app_name), fontSize = 16.sp) },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.DarkGray,
-            titleContentColor = Color.LightGray
-        )
-    ))
+                title = { Text(stringResource(id = R.string.app_name), fontSize = 16.sp) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.DarkGray,
+                    titleContentColor = Color.LightGray
+                )
+            ))
         },
     ) { innerPadding ->
         LazyColumn(
@@ -55,71 +52,27 @@ fun ListRatesView(listRates: List<DataAlpha>) {
             item {
                 HeadingView() //Заголовок: валютная пара, покупка, продажа
             }
-            itemsIndexed(listRates) { _, listDataAlpha ->
-                //извлечь список курсов из общего списка
-                val listBodyDataAlpha: List<List<BodyDataAlpha>> = listOf(listDataAlpha.rate)
-
-                //разделить список списков на части
-                for (i in listBodyDataAlpha) {
-                    for (a in i) {
-                        ListItemCurrency(items = a)
-                    }
-                }
+            items(listRate) {
+                ListItemCurrency(it)
             }
         }
     }
 }
 
-// состовляющие одной строки
-//@Preview (widthDp = 300, heightDp = 50)
 @Composable
-fun ListItemCurrency(items: BodyDataAlpha) {
-
+fun ListItemCurrency(item: Rate) {
     Row(
         modifier = Modifier
-            .fillMaxSize(fraction = 0.95f)
+            .fillMaxSize()
             .padding(4.dp)
             .height(42.dp)
             .background(Color.White)
     ) {
+        BoxItem(modifier = Modifier.weight(0.25f), text = item.sellIso)
+        BoxItem(modifier = Modifier.weight(0.25f), text = item.buyIso)
+        BoxItem(modifier = Modifier.weight(0.25f), text = item.buyRate.toString())
+        BoxItem(modifier = Modifier.weight(0.25f), text = item.sellRate.toString())
 
-        Box( // 1 валюта
-            modifier = Modifier
-                .weight(weight = 0.25f)
-        ) {
-            Text(
-                text = items.sellIso,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-
-        Box( //2 валюта
-            modifier = Modifier
-                .weight(weight = 0.25f)
-        ) {
-            Text(
-                text = items.buyIso,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-        Box( //курс продажи
-            modifier = Modifier
-                .weight(weight = 0.25f)
-        ) {
-            Text(
-                text = items.buyRate.toString(),
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-        Box( //курс покупки
-            modifier = Modifier
-                .weight(weight = 0.25f)
-        ) {
-            Text(
-                text = items.sellRate.toString(),
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
+        SpacerItem()
     }
 }

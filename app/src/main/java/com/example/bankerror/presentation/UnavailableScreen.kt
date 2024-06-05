@@ -1,6 +1,5 @@
 package com.example.bankerror.presentation
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,11 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bankerror.R
-import com.example.bankerror.TAGbank
 
 @Composable
 fun UnavailableScreen(mutableState: MutableState<Int>) {
-    Log.i(TAGbank, "Загрузка экрана *Нет доступа к сети*")
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -39,7 +36,7 @@ fun UnavailableScreen(mutableState: MutableState<Int>) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedButton(onClick =  { mutableState.value = 0 }) {
+        OutlinedButton(onClick =  { mutableState.value = INTERNET_CHECK }) {
             Text(text = stringResource(id = R.string.repeat))
         }
     }
