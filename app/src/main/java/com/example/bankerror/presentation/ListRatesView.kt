@@ -1,19 +1,22 @@
 package com.example.bankerror.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +30,8 @@ import com.example.bankerror.ui.theme.components.SpacerItem
 
 @Composable
 fun ListRatesView(listRate: List<Rate>) {
+
+    val rateIndex = rememberSaveable { mutableStateOf<Int?>(null) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -50,29 +55,39 @@ fun ListRatesView(listRate: List<Rate>) {
                 .background(Color.LightGray)
         ) {
             item {
-                HeadingView() //Заголовок: валютная пара, покупка, продажа
+                HeadingView()
             }
-            items(listRate) {
-                ListItemCurrency(it)
+            itemsIndexed(listRate) { index, item ->
+                ListItemCurrency(
+                    item = item,
+                    modifier = Modifier.clickable {
+                        rateIndex.value = index
+                    }
+                )
             }
         }
+    }
+    if (rateIndex.value != null) {
+        OneRatePage(
+            rate = listRate[rateIndex.value!!],
+            onDismiss = { rateIndex.value = null }
+        )
     }
 }
 
 @Composable
-fun ListItemCurrency(item: Rate) {
+fun ListItemCurrency(item: Rate, modifier: Modifier) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(4.dp)
             .height(42.dp)
             .background(Color.White)
     ) {
-        BoxItem(modifier = Modifier.weight(0.25f), text = item.sellIso)
-        BoxItem(modifier = Modifier.weight(0.25f), text = item.buyIso)
-        BoxItem(modifier = Modifier.weight(0.25f), text = item.buyRate.toString())
-        BoxItem(modifier = Modifier.weight(0.25f), text = item.sellRate.toString())
-
+        BoxItem(modifier = modifier.weight(0.2f), text = item.sellIso)
+        BoxItem(modifier = modifier.weight(0.2f), text = item.buyIso)
+        BoxItem(modifier = modifier.weight(0.3f), text = item.buyRate.toString())
+        BoxItem(modifier = modifier.weight(0.3f), text = item.sellRate.toString())
         SpacerItem()
     }
 }

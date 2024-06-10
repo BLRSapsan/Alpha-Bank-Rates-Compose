@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Alpha Compose</string>
-
     <string name="rate_national_bank">Курс нацбанка</string>
     <string name="rate_alpha">Курс Альфа-банка</string>
     <string name="buy">Покупка</string>

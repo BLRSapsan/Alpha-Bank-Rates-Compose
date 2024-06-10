@@ -2,7 +2,6 @@ package com.example.bankerror.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -20,14 +19,13 @@ import com.example.bankerror.ui.theme.components.SpacerItem
 fun HeadingView(modifier: Modifier = Modifier) {
     Row(
         modifier = Modifier
-            .fillMaxSize()
             .padding(4.dp)
             .height(42.dp)
             .background(Color.White)
     ) {
-        BoxItem(modifier = Modifier.weight(0.5f), text = stringResource(R.string.currency_para))
-        BoxItem(modifier = Modifier.weight(0.25f), text = stringResource(R.string.sale))
-        BoxItem(modifier = Modifier.weight(0.25f), text = stringResource(R.string.buy))
+        BoxItem(modifier = Modifier.weight(0.4f), text = stringResource(R.string.currency_para))
+        BoxItem(modifier = Modifier.weight(0.3f), text = stringResource(R.string.sale))
+        BoxItem(modifier = Modifier.weight(0.3f), text = stringResource(R.string.buy))
         SpacerItem()
     }
 }
