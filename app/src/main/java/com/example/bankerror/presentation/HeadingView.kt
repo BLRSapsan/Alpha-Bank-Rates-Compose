@@ -9,8 +9,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bankerror.R
-import com.example.bankerror.ui.theme.components.BoxItem
-import com.example.bankerror.ui.theme.components.SpacerItem
+import com.example.bankerror.presentation.components.BoxItem
+import com.example.bankerror.presentation.components.SpacerItem
 
 @Preview
 @Composable

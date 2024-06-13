@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bankerror.R
 import com.example.bankerror.domain.model.Rate
-import com.example.bankerror.ui.theme.components.CalculateBox
-import com.example.bankerror.ui.theme.components.SpacerItem
+import com.example.bankerror.presentation.components.CalculateBox
+import com.example.bankerror.presentation.components.SpacerItem
 
 @Composable
 fun OneRatePage(rate: Rate, onDismiss: () -> Unit, modifier: Modifier = Modifier) {

@@ -1,22 +1,41 @@
 package com.example.bankerror.domain
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankerror.data.toDomain
 import com.example.bankerror.domain.model.Rate
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
+
+sealed interface RateUIState {
+    data class RateList(val rate: List<Rate>) : RateUIState
+    object Error : RateUIState
+    object Loading : RateUIState
+}
 
 class RatesAlphaBankVM(private val repository: Repository) : ViewModel() {
+    var rateUIState: RateUIState by mutableStateOf(RateUIState.Loading)
+        private set
 
+    init {
+        getRatesAlpha()
+    }
 
-    private val _itemsStateFlow: MutableStateFlow<List<Rate>> = MutableStateFlow(emptyList())
-    val itemsStateFlow: StateFlow<List<Rate>> get() = _itemsStateFlow
     fun getRatesAlpha() {
         viewModelScope.launch {
-            _itemsStateFlow.value = repository.getRates().rate.map {
-                it.toDomain()
+            rateUIState = RateUIState.Loading
+            rateUIState = try {
+                RateUIState.RateList(repository.getRates().rate.map {
+                    it.toDomain()
+                })
+            } catch (e: IOException) {
+                RateUIState.Error
+            } catch (e: HttpException) {
+                RateUIState.Error
             }
         }
     }

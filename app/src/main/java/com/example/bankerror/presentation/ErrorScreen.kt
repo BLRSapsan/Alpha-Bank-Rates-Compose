@@ -4,13 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -20,9 +18,9 @@ import androidx.compose.ui.unit.sp
 import com.example.bankerror.R
 
 @Composable
-fun UnavailableScreen(mutableState: MutableState<Int>) {
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -32,12 +30,12 @@ fun UnavailableScreen(mutableState: MutableState<Int>) {
             modifier = Modifier.size(100.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Internet is OFF", fontSize = 18.sp)
+        Text(text = stringResource(id = R.string.no_connection), fontSize = 18.sp)
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedButton(onClick =  { mutableState.value = INTERNET_CHECK }) {
-            Text(text = stringResource(id = R.string.repeat))
+        Button(onClick = retryAction) {
+            Text(stringResource(R.string.repeat))
         }
     }
 }

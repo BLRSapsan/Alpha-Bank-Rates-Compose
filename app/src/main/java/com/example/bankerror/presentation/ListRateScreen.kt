@@ -16,16 +16,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.bankerror.domain.model.Rate
-import com.example.bankerror.ui.theme.components.BoxItem
-import com.example.bankerror.ui.theme.components.SpacerItem
+import com.example.bankerror.presentation.components.BoxItem
+import com.example.bankerror.presentation.components.SpacerItem
 
 @Composable
-fun ListRatesView(listRate: List<Rate>) {
+fun ListRatesView(listRate: List<Rate>, modifier: Modifier) {
 
     val rateIndex = rememberSaveable { mutableStateOf<Int?>(null) }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) { innerPadding ->
         LazyColumn(
             userScrollEnabled = true,
