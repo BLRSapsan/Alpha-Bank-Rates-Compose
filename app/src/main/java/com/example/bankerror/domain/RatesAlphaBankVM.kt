@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class RatesAlphaBankVM(private val repository: Repository) : ViewModel() {
 
-    private val _itemsStateFlow: MutableStateFlow<List<Rate>> =
-        MutableStateFlow(emptyList())
+
+    private val _itemsStateFlow: MutableStateFlow<List<Rate>> = MutableStateFlow(emptyList())
     val itemsStateFlow: StateFlow<List<Rate>> get() = _itemsStateFlow
     fun getRatesAlpha() {
         viewModelScope.launch {

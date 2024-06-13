@@ -33,13 +33,12 @@ fun BoxItem(
 }
 
 @Composable
-fun SpacerItem() {
-    Spacer(modifier = Modifier.height(4.dp))
+fun SpacerItem(modifier: Modifier) {
+    Spacer(modifier = modifier)
 }
 
-
 @Composable
-fun CalculateBlock(rate: Double, modifier: Modifier) {
+fun CalculateBox(currencyFirst: String, currencySecond: String, rate: Double, modifier: Modifier) {
 
     var text by rememberSaveable { mutableStateOf("1.0") }
 
@@ -48,6 +47,7 @@ fun CalculateBlock(rate: Double, modifier: Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(
+            label = { Text(text = currencyFirst) },
             value = text,
             onValueChange = {
                 text = if (it.isEmpty()) {
@@ -62,13 +62,18 @@ fun CalculateBlock(rate: Double, modifier: Modifier) {
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
         )
-        val format = DecimalFormat("#.##").format(((text.toDoubleOrNull() ?: 0.0) * rate))
-        Text(text = format.toString())
+        SpacerItem(modifier.height(4.dp))
+        OutlinedTextField(
+            label = { Text(text = currencySecond) },
+            readOnly = true,
+            value = DecimalFormat("#.##").format((text.toDoubleOrNull() ?: 0.0) * rate).toString(),
+            onValueChange = {}
+        )
     }
 }
 
 fun regex(input: String): String {
-    if (input.matches("0+".toRegex())) return "0"
+    if (input.matches("0+".toRegex())) return ""
     val regex = """^[0-9.]+${'$'}'""".toRegex()
     regex.matches(input)
     return input

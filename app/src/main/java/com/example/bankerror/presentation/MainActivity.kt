@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import com.example.bankerror.ui.theme.CurrencyTheme
 import com.example.bankerror.utils.isConnect
+import com.example.compose.CurrencyTheme
 
 const val TAGbank = "AlphaBankLog"
 const val INTERNET_CHECK = 0
