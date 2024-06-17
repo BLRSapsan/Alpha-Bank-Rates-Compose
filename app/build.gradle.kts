@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -57,6 +58,11 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.retrofit)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
 
     implementation(libs.converter.gson)
     implementation(libs.androidx.core.ktx)

@@ -1,6 +1,6 @@
-package com.example.bankerror.data
+package com.example.bankerror.data.retrofit
 
-import com.example.bankerror.data.model.RatesResponse
+import com.example.bankerror.data.model.retrofit.RatesResponse
 import retrofit2.http.GET
 
 interface Api {
