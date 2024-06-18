@@ -1,4 +1,4 @@
-package com.example.bankerror.data.model.retrofit
+package com.example.bankerror.data.model
 
 import com.google.gson.annotations.SerializedName
 

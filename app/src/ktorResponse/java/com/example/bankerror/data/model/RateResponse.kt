@@ -1,9 +1,9 @@
-package com.example.bankerror.data.model.ktor
+package com.example.bankerror.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RateResponseKtor(
+data class RateResponse(
     val buyCode: Int,
     val buyIso: String,
     val buyRate: Double,

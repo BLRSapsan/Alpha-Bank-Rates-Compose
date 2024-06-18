@@ -1,7 +1,7 @@
-package com.example.bankerror.data.ktor
+package com.example.bankerror.data
 
 import android.util.Log
-import com.example.bankerror.data.model.ktor.RatesResponseKtor
+import com.example.bankerror.data.model.RatesResponse
 import com.example.bankerror.presentation.TAGbank
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -11,13 +11,14 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+
 private const val GET_RATE = "https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates/"
 
-class KtorResponse {
+class DataSourceImplementation : DataSource {
 
-    private lateinit var getResponseRates: RatesResponseKtor
+    private lateinit var getResponseRates: RatesResponse
 
-    suspend fun rateResponse(): RatesResponseKtor {
+    override suspend fun rateResponse(): RatesResponse {
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
                 json(Json {

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+
 android {
     namespace = "com.example.bankerror"
     compileSdk = 34
@@ -30,6 +31,23 @@ android {
             )
         }
     }
+
+    flavorDimensions += "dataSource"
+    productFlavors {
+        create("retrofitResponse") {
+            dimension = "dataSource"
+            applicationIdSuffix = ".retrofit"
+            versionNameSuffix = "-retrofit"
+            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
+        }
+        create("ktorResponse") {
+            dimension = "dataSource"
+            applicationIdSuffix = ".ktor"
+            versionNameSuffix = "-ktor"
+            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,6 +57,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
