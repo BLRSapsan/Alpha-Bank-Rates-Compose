@@ -9,12 +9,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bankerror.domain.RatesAlphaBankVM
 import com.example.compose.CurrencyTheme
-import org.koin.androidx.compose.koinViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-const val TAGbank = "AlphaBankLog"
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +32,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun RateApp() {
-    Scaffold{
+    Scaffold {
         Surface(modifier = Modifier.fillMaxSize()) {
-            val ratesViewModel: RatesAlphaBankVM = koinViewModel()
+            val ratesViewModel: RatesAlphaBankVM = viewModel()
             HomeScreen(
                 rateUIState = ratesViewModel.rateUIState,
                 retryAction = ratesViewModel::getRatesAlpha,

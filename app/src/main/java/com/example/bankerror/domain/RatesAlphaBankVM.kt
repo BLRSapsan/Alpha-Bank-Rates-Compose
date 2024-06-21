@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankerror.data.toDomain
 import com.example.bankerror.domain.model.Rate
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 sealed interface RateUIState {
     data class RateList(val rate: List<Rate>) : RateUIState
@@ -17,7 +19,8 @@ sealed interface RateUIState {
     object Loading : RateUIState
 }
 
-class RatesAlphaBankVM(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class RatesAlphaBankVM @Inject constructor(private val repository: Repository) : ViewModel() {
     var rateUIState: RateUIState by mutableStateOf(RateUIState.Loading)
         private set
 

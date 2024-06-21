@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlinx.serialization)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
-
 
 android {
     namespace = "com.example.bankerror"
@@ -32,22 +33,6 @@ android {
         }
     }
 
-    flavorDimensions += "dataSource"
-    productFlavors {
-        create("retrofitResponse") {
-            dimension = "dataSource"
-            applicationIdSuffix = ".retrofit"
-            versionNameSuffix = "-retrofit"
-            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
-        }
-        create("ktorResponse") {
-            dimension = "dataSource"
-            applicationIdSuffix = ".ktor"
-            versionNameSuffix = "-ktor"
-            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -60,7 +45,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -71,10 +56,9 @@ android {
 
 dependencies {
 
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.koin.core)
-    implementation(libs.koin.compose)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.retrofit)
     implementation(libs.ktor.client.core)
@@ -99,4 +83,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
