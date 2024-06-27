@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Alpha Compose</string>
-    <string name="rate_national_bank">Курс нацбанка</string>
-    <string name="rate_alpha">Курс Альфа-банка</string>
     <string name="buy">Покупка</string>
     <string name="sale">Продажа</string>
-    <string name="currency">Валюта</string>
     <string name="currency_para">Валютная пара</string>
     <string name="repeat">Повторить</string>
     <string name="no_connection">Нет подключения к сети</string>

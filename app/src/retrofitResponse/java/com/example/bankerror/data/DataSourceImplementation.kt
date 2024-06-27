@@ -5,13 +5,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-
 const val BASE_URL = "https://developerhub.alfabank.by:8273/"
 
-class DataSourceImplementation: DataSource {
+class DataSourceImplementation (private val api: Api) : DataSource {
 
-    override suspend fun rateResponse(): RatesResponse {
-        return getApi().getRates()
+    override suspend fun rateResponse(): Result<RatesResponse> {
+        return kotlin.runCatching { api.getRates() }
     }
 }
 

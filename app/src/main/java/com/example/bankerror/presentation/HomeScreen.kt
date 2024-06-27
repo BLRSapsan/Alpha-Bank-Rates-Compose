@@ -1,7 +1,6 @@
 package com.example.bankerror.presentation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -10,14 +9,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bankerror.R
-import com.example.bankerror.domain.RateUIState
 
 @Composable
 fun HomeScreen(
     rateUIState: RateUIState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     when (rateUIState) {
         is RateUIState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())

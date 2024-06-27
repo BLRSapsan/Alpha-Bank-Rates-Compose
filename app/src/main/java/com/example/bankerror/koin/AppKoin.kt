@@ -12,7 +12,7 @@ class AppKoin : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@AppKoin)
-            modules(AppModule)
+            modules(listOf(AppModule, DataModule))
         }
     }
 }

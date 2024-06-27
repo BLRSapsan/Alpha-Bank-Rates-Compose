@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -24,28 +23,22 @@ fun ListRatesView(listRate: List<Rate>, modifier: Modifier) {
 
     val rateIndex = rememberSaveable { mutableStateOf<Int?>(null) }
 
-    Scaffold(
+    LazyColumn(
+        userScrollEnabled = true,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top,
         modifier = modifier.fillMaxSize()
-    ) { innerPadding ->
-        LazyColumn(
-            userScrollEnabled = true,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        ) {
-            item {
-                HeadingView()
-            }
-            itemsIndexed(listRate) { index, item ->
-                ListItemCurrency(
-                    item = item,
-                    modifier = Modifier.clickable {
-                        rateIndex.value = index
-                    }
-                )
-            }
+    ) {
+        item {
+            HeadingView()
+        }
+        itemsIndexed(listRate) { index, item ->
+            ListItemCurrency(
+                item = item,
+                modifier = Modifier.clickable {
+                    rateIndex.value = index
+                }
+            )
         }
     }
     if (rateIndex.value != null) {

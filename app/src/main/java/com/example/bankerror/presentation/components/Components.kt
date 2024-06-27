@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.bankerror.utils.regex
 import java.text.DecimalFormat
 
 @Composable
@@ -70,11 +71,4 @@ fun CalculateBox(currencyFirst: String, currencySecond: String, rate: Double, mo
             onValueChange = {}
         )
     }
-}
-
-fun regex(input: String): String {
-    if (input.matches("0+".toRegex())) return ""
-    val regex = """^[0-9.]+${'$'}'""".toRegex()
-    regex.matches(input)
-    return input
 }

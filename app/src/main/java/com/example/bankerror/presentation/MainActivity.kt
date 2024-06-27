@@ -5,15 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.bankerror.domain.RatesAlphaBankVM
-import com.example.compose.CurrencyTheme
+import com.example.bankerror.ui.theme.CurrencyTheme
 import org.koin.androidx.compose.koinViewModel
-
-const val TAGbank = "AlphaBankLog"
 
 class MainActivity : ComponentActivity() {
 
@@ -32,13 +30,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun RateApp() {
-    Scaffold{
-        Surface(modifier = Modifier.fillMaxSize()) {
+    Scaffold { innerPadding ->
+        Surface(modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)) {
             val ratesViewModel: RatesAlphaBankVM = koinViewModel()
             HomeScreen(
                 rateUIState = ratesViewModel.rateUIState,
                 retryAction = ratesViewModel::getRatesAlpha,
-                contentPadding = it
             )
         }
     }

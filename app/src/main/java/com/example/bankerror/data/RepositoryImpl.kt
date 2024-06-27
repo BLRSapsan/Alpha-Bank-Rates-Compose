@@ -6,7 +6,7 @@ import com.example.bankerror.domain.Repository
 import com.example.bankerror.domain.model.Rate
 
 class RepositoryImpl (private val dataSource: DataSource): Repository {
-    override suspend fun getRates(): RatesResponse {
+    override suspend fun getRates(): Result<RatesResponse> {
         return dataSource.rateResponse()
     }
 }
