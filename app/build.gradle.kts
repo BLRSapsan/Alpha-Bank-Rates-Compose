@@ -38,13 +38,21 @@ android {
             dimension = "dataSource"
             applicationIdSuffix = ".retrofit"
             versionNameSuffix = "-retrofit"
-            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
+            buildConfigField(
+                "String",
+                "API_URL",
+                "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\""
+            )
         }
         create("ktorResponse") {
             dimension = "dataSource"
             applicationIdSuffix = ".ktor"
             versionNameSuffix = "-ktor"
-            buildConfigField( "String" , "API_URL" ,  "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\"")
+            buildConfigField(
+                "String",
+                "API_URL",
+                "\"https://developerhub.alfabank.by:8273/partner/1.0.1/public/rates\""
+            )
         }
     }
 
@@ -70,6 +78,10 @@ android {
 }
 
 dependencies {
+//lottie
+    implementation(libs.android.lottie.compose)
+//for AsyncImage
+    implementation(libs.coil.compose)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.androidx.compose)

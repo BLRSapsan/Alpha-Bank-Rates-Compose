@@ -39,10 +39,21 @@ fun SpacerItem(modifier: Modifier) {
 }
 
 @Composable
-fun CalculateBox(currencyFirst: String, currencySecond: String, rate: Double, modifier: Modifier) {
+fun CalculateBox(
+    quantity: String,
+    currencyFirst: String,
+    currencySecond: String,
+    rate: Double,
+    modifier: Modifier
+) {
 
-    var text by rememberSaveable { mutableStateOf("1.0") }
+    var text by rememberSaveable { mutableStateOf(quantity) }
 
+    fun checkRub(rateCheck: Double): Double {
+        return if (currencyFirst == "RUB") {
+            rateCheck / 100
+        } else rateCheck
+    }
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -67,7 +78,8 @@ fun CalculateBox(currencyFirst: String, currencySecond: String, rate: Double, mo
         OutlinedTextField(
             label = { Text(text = currencySecond) },
             readOnly = true,
-            value = DecimalFormat("#.##").format((text.toDoubleOrNull() ?: 0.0) * rate).toString(),
+            value = DecimalFormat("#.##").format((text.toDoubleOrNull() ?: 0.0) * checkRub(rate))
+                .toString(),
             onValueChange = {}
         )
     }

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.bankerror.domain.model.Rate
 import com.example.bankerror.presentation.components.BoxItem
+import com.example.bankerror.presentation.components.LoaderAnimation
 import com.example.bankerror.presentation.components.SpacerItem
 
 @Composable
@@ -40,7 +41,12 @@ fun ListRatesView(listRate: List<Rate>, modifier: Modifier) {
                 }
             )
         }
+
+        item {
+            LoaderAnimation(modifier = modifier)
+        }
     }
+
     if (rateIndex.value != null) {
         OneRatePage(
             rate = listRate[rateIndex.value!!],

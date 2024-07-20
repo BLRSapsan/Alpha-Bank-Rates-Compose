@@ -37,6 +37,7 @@ fun OneRatePage(rate: Rate, onDismiss: () -> Unit, modifier: Modifier = Modifier
             SpacerItem(modifier.height(4.dp))
             Text(text = stringResource(id = R.string.buy))
             CalculateBox(
+                quantity = rate.quantity.toString(),
                 currencyFirst = rate.sellIso,
                 currencySecond = rate.buyIso,
                 rate = rate.sellRate,
@@ -46,6 +47,7 @@ fun OneRatePage(rate: Rate, onDismiss: () -> Unit, modifier: Modifier = Modifier
 
             Text(text = stringResource(id = R.string.sale))
             CalculateBox(
+                quantity = rate.quantity.toString(),
                 currencyFirst = rate.sellIso,
                 currencySecond = rate.buyIso,
                 rate = rate.buyRate,
